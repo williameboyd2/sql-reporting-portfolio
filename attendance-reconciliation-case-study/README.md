@@ -34,3 +34,8 @@ The final query matched the standard report’s purchased counts while adding sc
 - Business rule validation
 - Report design
 - Tessitura/CRM reporting logic
+
+## Project Status
+
+Version 1.0 SQL logic completed.  
+SSRS report layout and deployment pending.
