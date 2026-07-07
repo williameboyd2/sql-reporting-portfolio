@@ -1,7 +1,7 @@
 # Attendance Reconciliation by Scan Date
 
 ## Business Problem
-The standard attendance report did not fully answer our operational need for reconciling general admission events where voucher-style tickets could be redeemed across multiple performances.
+The standard attendance report did not fully answer the operational need for reconciling general admission events where voucher-style tickets could be redeemed across multiple performances.
 
 ## Goal
 Build a report that shows:
