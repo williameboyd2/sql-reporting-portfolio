@@ -6,6 +6,12 @@ The Performance Schedule Export is a custom SQL Server Reporting Services report
 
 The report gives ticketing and operational teams a centralized schedule containing performance dates, times, venues, statuses, and internal scheduling notes.
 
+## Fictional Sample Output
+
+![Fictional sample Performance Schedule Excel export](images/sample-excel-output.png)
+
+*Fictional sample output created for portfolio demonstration. No employer, customer, or proprietary Tessitura data is shown.*
+
 ## Business Problem
 
 Performance information existed in the CRM, but creating a practical scheduling document required staff to gather and reorganize information from multiple sources.
