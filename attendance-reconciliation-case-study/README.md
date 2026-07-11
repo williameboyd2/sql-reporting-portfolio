@@ -8,6 +8,12 @@ The standard attendance report associated activity primarily with the ticket's p
 
 The report therefore needed to reconcile attendance using the **actual scan date**.
 
+## Fictional Sample Output
+
+![Fictional sample Attendance Reconciliation report](images/sample-report-preview.png)
+
+*Fictional sample output created for portfolio demonstration. No employer, customer, or proprietary Tessitura data is shown.*
+
 ## Business Problem
 
 The ticketing team needed a report that could clearly show:
