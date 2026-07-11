@@ -1,63 +1,152 @@
 # Attendance Reconciliation by Scan Date
 
-## Business Problem
-The standard attendance report did not fully answer the operational need for reconciling general admission events where voucher-style tickets could be redeemed across multiple performances.
+## Project Overview
 
-## Goal
-Build a report that shows:
-- Tickets sold
-- Tickets scanned
-- No-shows
-- Voucher admissions
-- Complimentary admissions by reason
-- Staff and volunteer admissions
-- Grand totals
+This project began with an attendance-reporting problem involving general admission events and voucher-style tickets.
+
+The standard attendance report associated activity primarily with the ticket's performance. That did not fully answer the operational question because some tickets could be sold against one performance record but redeemed on a different event date.
+
+The report therefore needed to reconcile attendance using the **actual scan date**.
+
+## Business Problem
+
+The ticketing team needed a report that could clearly show:
+
+* How many single-event tickets were sold
+* How many tickets were scanned
+* How many single-event tickets were not scanned
+* How many voucher-style tickets were redeemed
+* How complimentary admissions were distributed by reason
+* How many staff and volunteer admissions occurred
+* Overall attendance totals for the selected date and venue
+
+The primary challenge was that ticket sales, ticket-history records, and attendance scans did not all represent the same type of activity.
+
+## Report Parameters
+
+The completed SSRS report uses two primary parameters:
+
+* **Scan Date** — the calendar date on which attendance activity occurred
+* **Venue** — the facility associated with the event activity
 
 ## Investigation
-Initial testing showed that ticket history data overcounted purchased tickets. I compared SQL results against the standard attendance report and investigated the discrepancy.
 
-## Key Findings
-- Ticket history tables can contain multiple historical rows for the same ticket.
-- Purchased ticket counts need to reflect current valid ticket state.
-- Attendance scans need to be grouped by scan date, not just performance date.
-- Complimentary admissions should be broken out by reason for operational clarity.
+Initial versions of the query produced incorrect totals because ticket-history tables could contain multiple records representing changes to the same ticket.
 
-## Final Result
-The final query matched the standard report’s purchased counts while adding scan-date reconciliation and comp-reason detail not available in the standard report.
+Simply counting rows from ticket history caused purchased-ticket totals to be overstated.
 
-## Sample Output
+The investigation showed that:
 
-The final report returns:
+* Historical ticket rows cannot automatically be treated as unique active tickets.
+* Current ticket state and ticket history serve different reporting purposes.
+* Scan date and performance date are not always equivalent.
+* Voucher-style tickets require separate business logic.
+* Complimentary admissions need additional classification to be operationally useful.
+* Existing report totals are an important validation source, but they do not always provide the complete breakdown needed by the business.
 
-| Ticket Category | Tickets Sold | Tickets Scanned | No Shows |
-|---|---:|---:|---:|
-| Standard | 304 | 282 | 22 |
-| Student/Senior | 108 | 92 | 16 |
-| Movie Strip | - | 301 | - |
-| Single-Event Comp | 1 | - | 1 |
-| General Comp | - | 1 | - |
-| Development Comp | - | 21 | - |
-| Donor Comp | - | 2 | - |
-| Marketing Comp | - | 15 | - |
-| Staff Comp | - | 2 | - |
-| Voucher Comp | - | 28 | - |
-| Volunteer | - | 8 | - |
+## Technical Approach
 
-| Total Tickets Sold | Total Tickets Scanned | Total No Shows |
-|---:|---:|---:|
-| 413 | 752 | 39 |
+The report separates the attendance process into several logical components:
+
+1. Identify the requested scan date and venue.
+2. Retrieve valid sold single-event tickets.
+3. Retrieve attendance activity using the actual scan timestamp.
+4. Identify voucher-style admissions separately from regular sold tickets.
+5. categorize complimentary admissions using their associated reason.
+6. Calculate unscanned single-event tickets.
+7. Combine the results into a unified report output.
+8. Produce report-level totals.
+
+The query uses T-SQL techniques including:
+
+* Temporary tables
+* Aggregate functions
+* Conditional categorization
+* Null handling
+* Date conversion
+* Ticket-history lookups
+* Attendance aggregation
+* Multiple result categories combined into a single report dataset
+
+## Report Output
+
+The final report includes categories such as:
+
+* Standard tickets
+* Student and senior tickets
+* Movie strips or vouchers
+* Single-event complimentary tickets
+* General complimentary admissions
+* Development complimentary admissions
+* Donor complimentary admissions
+* Marketing complimentary admissions
+* Staff admissions
+* Volunteer admissions
+* Other configured complimentary reasons
+
+The report presents:
+
+* Tickets sold
+* Tickets scanned
+* No-shows
+* Category totals
+* Grand totals
+
+Voucher admissions are counted as scanned admissions but are not treated as single-event ticket sales. No-shows are calculated only for applicable single-event tickets.
+
+## Validation
+
+The final query was tested against:
+
+* Existing standard report totals
+* Manually verified attendance counts
+* Known voucher-redemption activity
+* Complimentary admission breakdowns
+* Individual event-day reconciliation results
+
+The completed report matched the expected purchased-ticket and attendance totals while also providing scan-date and complimentary-reason details that were not available together in the standard report.
+
+## SSRS Implementation
+
+After the SQL logic was validated, the report was developed in SQL Server Reporting Services.
+
+The implementation included:
+
+* A custom SSRS report layout
+* Scan Date and Venue parameters
+* Tessitura session and security context
+* Report totals
+* Production deployment through Visual Studio
+* Configuration in the Tessitura Reports menu
+
+The report was deployed to the production SSRS environment and added to the Ticketing Box Office report category.
 
 ## Skills Demonstrated
-- SQL Server
-- T-SQL
-- Data reconciliation
-- CTEs and temporary tables
-- Aggregate reporting
-- Business rule validation
-- Report design
-- Tessitura/CRM reporting logic
+
+* Microsoft SQL Server
+* T-SQL
+* SQL Server Reporting Services
+* Attendance reconciliation
+* Ticket-history analysis
+* Temporary tables
+* Aggregate reporting
+* Conditional business logic
+* Parameterized reports
+* Report validation
+* Troubleshooting data discrepancies
+* Visual Studio report deployment
+* Tessitura CRM reporting
+* Translating operational requirements into a technical solution
 
 ## Project Status
 
-Version 1.0 SQL logic completed.  
-SSRS report layout and deployment pending.
+**Completed and deployed.**
+
+The SQL logic, SSRS report design, report parameters, production deployment, and Tessitura report configuration have been completed and validated.
+
+## Privacy and Sanitization
+
+The public portfolio version of this project excludes customer-level information, organizational credentials, internal server addresses, and proprietary transactional data.
+
+Table structures and sample outputs are presented only to demonstrate the reporting approach and technical concepts.
+
