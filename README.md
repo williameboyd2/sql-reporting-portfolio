@@ -34,6 +34,25 @@ The report combines:
 
 ---
 
+### [Platinum Seating Detail Export](platinum-seating-detail-export/)
+
+A seat-level inventory and pricing export for performances using Platinum or dynamically priced seating zones.
+
+The report combines:
+
+* Current sold, held, and open seat inventory
+* Historical pricing for sold seats
+* Current configured pricing for open and held seats
+* Base price, facility fee, and Platinum lift detail
+* Simplified renter-facing statuses
+* Blank request columns for inventory and pricing changes
+
+**Key skills:** T-SQL, common table expressions, `OUTER APPLY`, effective-date pricing, historical and current data reconciliation, pricing-layer aggregation, seat inventory, and operational workflow design.
+
+**Status:** SQL logic completed and validated.
+
+---
+
 ### [Performance Schedule Export](performance-schedule-export/)
 
 An Excel-oriented scheduling report that produces a clean list of upcoming performances for ticketing and operational planning.
@@ -129,6 +148,8 @@ The output includes:
 * Aggregate reporting
 * Data reconciliation
 * Financial analysis
+* Pricing-layer analysis
+* Seat inventory reporting
 * Customer and order analysis
 * Report deployment
 * Excel-oriented report design
@@ -156,4 +177,3 @@ No customer information, credentials, internal server addresses, or proprietary 
 ## Current Focus
 
 I am continuing to develop my skills in T-SQL, SSRS, CRM administration, data analytics, and business intelligence while pursuing opportunities involving Tessitura, ticketing technology, CRM systems, and performing arts administration.
-
