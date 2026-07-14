@@ -53,6 +53,23 @@ The report combines:
 
 ---
 
+### [Performance Inventory Status Summary](performance-inventory-status-summary/)
+
+A concise performance-level inventory query that translates current seat statuses into operational totals.
+
+The report summarizes:
+
+* Sold seats
+* Seats temporarily locked in shopping carts
+* Open seats available for sale
+* Total inventory represented by the included categories
+
+**Key skills:** T-SQL, conditional aggregation, status normalization, current seat inventory, parameterized queries, and operational reporting.
+
+**Status:** SQL logic completed and validated.
+
+---
+
 ### [Performance Schedule Export](performance-schedule-export/)
 
 An Excel-oriented scheduling report that produces a clean list of upcoming performances for ticketing and operational planning.
@@ -155,6 +172,7 @@ The output includes:
 * Excel-oriented report design
 * Business-rule validation
 * Data anonymization
+* Conditional aggregation
 
 ## Portfolio Approach
 
