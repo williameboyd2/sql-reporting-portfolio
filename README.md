@@ -70,6 +70,24 @@ The report summarizes:
 
 ---
 
+### [Active Promo Offers Report](active-promo-offers-report/)
+
+An administrative audit that consolidates current promo-code configuration from pricing rules and mode-of-sale offers.
+
+The report summarizes:
+
+* Promo codes and source numbers
+* Offer types, descriptions, and setup methods
+* Eligible performances and full-production coverage
+* Discounted price types and sales channels
+* Active dates and maximum-seat restrictions
+
+**Key skills:** T-SQL, CTEs, `STRING_SPLIT`, `STRING_AGG`, configuration auditing, multi-source data normalization, date filtering, and business-friendly output design.
+
+**Status:** SQL logic completed and validated.
+
+---
+
 ### [Performance Schedule Export](performance-schedule-export/)
 
 An Excel-oriented scheduling report that produces a clean list of upcoming performances for ticketing and operational planning.
@@ -173,6 +191,8 @@ The output includes:
 * Business-rule validation
 * Data anonymization
 * Conditional aggregation
+* Configuration auditing
+* Multi-source data normalization
 
 ## Portfolio Approach
 
